@@ -1,5 +1,5 @@
 # Sprint Challenge: Express and Node.js - Projects & Actions
-
+ 
 ## Description
 
 In this challenge, you design and create a web API to manage the following resources: `Projects` and `Actions`.
