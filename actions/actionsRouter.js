@@ -64,4 +64,22 @@ router.delete('/:id', (req, res) => {
       });
   });
 
+  router.put('/:id', middleware.validateActionId, middleware.validateAction, (req, res) => {
+    const changes = req.body;
+    const id = req.params.id;
+
+    actionsDb.update(id, changes)
+    .then(editAction => {
+        if (editAction) {
+            res.status(200).json(editAction);
+        } else {
+            res.status(404).json({ message: "The action with the specified ID does not exist." });
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({ error: "The action information could not be modified." });
+      });
+  });
+
 module.exports = router;
