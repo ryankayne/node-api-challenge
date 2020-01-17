@@ -1,5 +1,5 @@
 # Sprint Challenge: Express and Node.js - Projects & Actions
-
+ 
 ## Description
 
 In this challenge, you design and create a web API to manage the following resources: `Projects` and `Actions`.
@@ -40,13 +40,25 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+    It's a web app framework that's housed on Node.js web server. (Like React for Backend). 
+
+	You can utilize middleware to run functions in between request and response objects.
+
 - [ ] Describe Middleware?
+
+    Middleware is a function that is invoked in a router to perform some action with the request before sending the code on it's way through 	to the next function or line of code. 
 
 - [ ] Describe a Resource?
 
+    In RESTful Web API, everything is a resource that can be accessed via a unique URI. They can  have mulitple representations, and are managed via HTTP methods.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+    An HTTP status code, typically a (200). Most codes that start with a 2 will indicate success of some kind, whether creating (201), accepting (202), resetting content (205), etc.
+
 - [ ] How can we partition our application into sub-applications?
+
+    Seperate our server from index and routers and import/export them to each other.
 
 ## Minimum Viable Product
 
