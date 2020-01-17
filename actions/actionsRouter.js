@@ -29,4 +29,22 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/:id', (req, res) => {
+    const {  description, notes, completed } = req.body;
+    const newAction = { description, notes, completed };
+
+    if (!description || !notes || !completed) {
+        res.status(400).json({ errorMessage: "Please provide description, notes, completed for the action." });
+    } else {
+        actionsDb.insert(newAction)
+        .then(addedAction => {
+            res.status(201).json(addedAction);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ error: "There was an error while saving the action to the database" });
+        });
+    }
+});
+
 module.exports = router;
