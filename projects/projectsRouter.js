@@ -4,6 +4,8 @@ const router = express.Router();
 
 const projectsDb = require('../data/helpers/projectModel.js');
 
+const middleware = require('../middleware/middleware.js');
+
 router.get('/', (req, res) => {
     projectsDb.get(req.query)
       .then(getProject => {
@@ -46,5 +48,40 @@ router.get('/', (req, res) => {
         });
     }
 });
+
+router.delete('/:id', (req, res) => {
+    projectsDb.remove(req.params.id)
+      .then(count => {
+          if (count > 0) {
+              res.status(200).json({ message: "The project has been deleted." });
+          } else {
+              res.status(404).json({ message: "The project with the specified ID does not exist." });
+          }
+      })
+      .catch(error => {
+          console.log(error);
+          res.status(500).json({ error: "The project could not be removed." })
+      });
+  });
+
+  router.put('/:id', middleware.validateProject, (req, res) => {
+    const changes = req.body;
+    const id = req.params.id;
+  
+    projectsDb.update(id, changes)
+    .then(editProject => {
+      if (editProject) {
+        res.status(200).json(editProject);
+      } else {
+        res.status(404).json({ message: "The project with the specified ID does not exist." });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: "The project information could not be modified." });
+    });
+  });
+
+
 
 module.exports = router;
