@@ -14,4 +14,17 @@ function validateProject(req, res, next) {
     }
 }
 
-module.exports = { validateProject }
+function validateProjectId(req, res, next) {
+    const id = req.params.id;
+    projectModel.get(id)
+    .then(projectId => {
+        if(!projectId) {
+            res.status(404).json({ message: "The project with this ID does not exist." })
+        } else {
+            next();
+        }
+    })    
+}
+
+
+module.exports = { validateProject, validateProjectId }

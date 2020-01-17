@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
       })
   });
 
-  router.get('/:id', (req, res) => {
+  router.get('/:id', middleware.validateProjectId, (req, res) => {
       const id = req.params.id;
 
       projectsDb.get(id)
